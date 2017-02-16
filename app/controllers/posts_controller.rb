@@ -18,7 +18,6 @@ class PostsController < ApplicationController
 
     # Save in database
     if @post.save
-      #Create flash message
       flash[:notice] = "Post successfully created"
 
       #Redirect to main resource pages
@@ -36,7 +35,9 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path, :notice => "Your post has been updated"
+      flash[:notice] = "Your post has been updated"
+
+      redirect_to post_path
     else
       render 'edit'
     end
