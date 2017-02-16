@@ -3,12 +3,50 @@ class CategoriesController < ApplicationController
     @categories = Category.all
   end
 
-  def edit
+  def new
+    @page_title = 'Add Category'
+    @category = Category.new
   end
 
-  def new
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def create
+    @category = Category.new(category_params)
+    if @category.save
+      flash[:notice] = 'Category Created'
+      redirect_to categories_path
+    else
+      render 'new'
+    end
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    if @category.update(category_params)
+      flash[:notice] = 'Category Updated'
+      redirect_to categories_path
+    else
+      render 'edit'
+    end
   end
 
   def show
+    @category = Category.find(params[:id])
+    @title = @category.name
+    @posts = @category.posts
+  end
+
+  def destroy
+    @category = Category.find(params[:id])
+    @category.destroy
+    flash[:notice] = 'Category Deleted'
+    redirect_to categories_path
+  end
+
+  private
+  def category_params
+    params.require(:category).permit(:name)
   end
 end
