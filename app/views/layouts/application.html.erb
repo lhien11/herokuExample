@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <title>Myrubyblog</title>
@@ -9,10 +9,52 @@
     </head>
     <body>
         <% if flash[:notice] %>
-        <div class="notice"><%= flash[:notice] %></div>
+        <div class="notice">
+        <%= flash[:notice] %></div>
         <% end %>
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
         <%= yield %>
     </body>
+</html> -->
+
+<%= render "partials/header" %>
+  <div id="page">
+   <div id="page-bgtop">
+    <div id="page-bgbtm">
+     <div id="content">
+
+     	<div class="flash-message">
+        <% if flash[:notice] %>
+        <div class="notice">
+        <%= flash[:notice] %></div>
+        <% end %>
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
+		  </div>
+
+      <!-- For Devise
+      <p class="notice"><%= notice %></p>
+    	<p class="alert"><%= alert %></p> -->
+
+	    <%= yield %> <!-- main view -->
+	    <div style="clear: both;">&nbsp;</div>
+     </div>
+     <!-- end #content -->
+
+     <%= render "partials/sidebar" %>
+     <div style="clear: both;">&nbsp;</div>
+
+    </div>
+
+   </div>
+  </div>
+  <!-- end #page-->
+  <div id="footer">
+   <p>Copy: 2017, My Ruby Blog -Sample Project</p>
+  </div>
+  <!-- en #footer-->
+ </div>
+ <!-- end #wrapper-->
+</body>
 </html>
